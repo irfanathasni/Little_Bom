@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+     <link rel="stylesheet" href="/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- 🔹 Sidebar -->
+                <%- include('../partials/sidebar') %>
+        <!-- 🔹 Main Section -->
+        <div class="col-md-10">
+
+            <!-- 🔸 Topbar -->
+            <div class="topbar d-flex justify-content-between align-items-center p-3">
+                <h5 class="mb-0">Dashboard</h5>
+                <div>
+                    <span class="me-3">LittleBom</span>
+                    <a href="/admin/logout" class="btn btn-sm btn-outline-danger">Logout</a>
+                </div>
+            </div>
+
+            <!-- 🔸 Content -->
+            <div class="content mt-3">
+
+                <!-- Cards -->
+                <div class="row g-4">
+
+                    <!-- Total Users -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0 p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted">Total Users</h6>
+                                    <h2 class="fw-bold display-6"><%= totalUsers %></h2>
+                                </div>
+                                <div class="bg-primary text-white p-3 rounded">
+                                    <i class="bi bi-people fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Products -->
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0 p-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted">Total Products</h6>
+                                    <h2 class="fw-bold display-6"><%= totalProducts %></h2>
+                                </div>
+                                <div class="bg-success text-white p-3 rounded">
+                                    <i class="bi bi-box-seam fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Welcome Card -->
+                <div class="mt-5">
+                    <div class="card p-4 shadow-sm">
+                        <h5>Welcome to Admin Dashboard </h5>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

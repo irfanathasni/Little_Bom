@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Placed – LittleBom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;600;700&display=swap">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --primary:#8b5e3c;--bg:#faf9f7;--surface:#f0ede8;
+      --border:#e8e4df;--text:#2c2c2c;--muted:#8a8680;
+      --green:#2d7a5a;
+      --font-h:'Playfair Display',serif;--font-b:'Lato',sans-serif;
+    }
+    body{font-family:var(--font-b);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+    /* NAV */
+    .navbar-custom{background:var(--bg);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+    .navbar-brand-text{font-family:var(--font-h);font-size:1.35rem;font-weight:700;color:var(--text);text-decoration:none}
+    .navbar-icons{display:flex;align-items:center;gap:20px}
+    .navbar-icons a{color:var(--text);font-size:1.1rem;text-decoration:none}
+
+    /* MAIN */
+    .success-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px}
+    .success-card{background:#fff;border-radius:24px;border:1px solid var(--border);max-width:560px;width:100%;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.06)}
+
+    /* TOP BANNER */
+    .success-banner{background:linear-gradient(135deg,#f5efe9 0%,#ede4d8 100%);padding:40px 32px 32px;text-align:center;border-bottom:1px solid var(--border)}
+    .check-circle{width:72px;height:72px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:pop .5s cubic-bezier(.36,.07,.19,.97) both}
+    @keyframes pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+    .check-circle i{font-size:2rem;color:#fff}
+    .success-title{font-family:var(--font-h);font-size:1.6rem;font-weight:700;margin-bottom:6px}
+    .success-sub{font-size:.85rem;color:var(--muted)}
+    .order-id-badge{display:inline-block;margin-top:14px;background:#fff;border:1px solid var(--border);border-radius:50px;padding:6px 18px;font-size:.78rem;color:var(--muted);letter-spacing:.04em}
+    .order-id-badge span{color:var(--primary);font-weight:700}
+
+    /* BODY */
+    .success-body{padding:28px 32px}
+
+    /* ADDRESS */
+    .section-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:10px}
+    .addr-box{background:var(--surface);border-radius:10px;padding:14px 16px;font-size:.83rem;line-height:1.7;margin-bottom:22px}
+    .addr-name{font-weight:700;margin-bottom:2px}
+
+    /* ITEMS */
+    .item-row{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--surface)}
+    .item-row:last-child{border-bottom:none}
+    .item-img{width:50px;height:50px;border-radius:8px;object-fit:cover;background:var(--surface);flex-shrink:0}
+    .item-info{flex:1}
+    .item-name{font-weight:700;font-size:.85rem}
+    .item-qty{font-size:.76rem;color:var(--muted)}
+    .item-price{font-weight:700;font-size:.85rem;color:var(--primary);white-space:nowrap}
+
+    /* TOTALS */
+    .totals{margin-top:20px;border-top:1px solid var(--border);padding-top:16px}
+    .total-row{display:flex;justify-content:space-between;font-size:.83rem;color:var(--muted);margin-bottom:8px}
+    .total-row span:last-child{color:var(--text);font-weight:600}
+    .discount-row{display:flex;justify-content:space-between;font-size:.83rem;color:var(--green);margin-bottom:8px}
+    .grand-row{display:flex;justify-content:space-between;font-weight:700;font-size:1rem;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+    .grand-row span:last-child{color:var(--primary)}
+
+    /* PAYMENT BADGE */
+    .payment-badge{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border-radius:50px;padding:5px 14px;font-size:.76rem;font-weight:700;color:var(--muted);margin-top:16px}
+    .payment-badge i{color:var(--primary)}
+
+    /* CTA */
+    .cta-wrap{padding:0 32px 32px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn-primary-custom{flex:1;background:var(--primary);color:#fff;border:none;border-radius:50px;padding:14px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:var(--font-b);text-align:center;text-decoration:none;display:block}
+    .btn-primary-custom:hover{background:#74492d;color:#fff}
+    .btn-outline-custom{flex:1;background:transparent;color:var(--primary);border:1.5px solid var(--primary);border-radius:50px;padding:14px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;font-family:var(--font-b);text-align:center;text-decoration:none;display:block}
+    .btn-outline-custom:hover{background:var(--surface)}
+
+    /* CONFETTI */
+    .confetti-wrap{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;overflow:hidden}
+    .confetti-piece{position:absolute;width:8px;height:8px;border-radius:2px;top:-10px;animation:fall linear forwards}
+    @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+    footer{background:var(--surface);padding:24px 48px;border-top:1px solid var(--border);text-align:center;font-size:.75rem;color:var(--muted)}
+
+    @media(max-width:600px){
+      .navbar-custom,.cta-wrap{padding-left:20px;padding-right:20px}
+      .success-banner,.success-body{padding-left:20px;padding-right:20px}
+      .cta-wrap{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+
+<!-- CONFETTI -->
+<div class="confetti-wrap" id="confettiWrap"></div>
+
+<nav class="navbar-custom">
+  <a href="/" class="navbar-brand-text">LittleBom</a>
+  <div class="navbar-icons">
+    <a href="/cart"><i class="bi bi-bag"></i></a>
+    <a href="/profile"><i class="bi bi-person"></i></a>
+  </div>
+</nav>
+
+<div class="success-wrap">
+  <div class="success-card">
+
+    <!-- BANNER -->
+    <div class="success-banner">
+      <div class="check-circle"><i class="bi bi-check-lg"></i></div>
+      <div class="success-title">Order Placed! 🎉</div>
+      <div class="success-sub">Thank you! Your order is confirmed and being processed.</div>
+      <div class="order-id-badge">Order ID: <span>#<%= order._id.toString().slice(-8).toUpperCase() %></span></div>
+    </div>
+
+    <!-- BODY -->
+    <div class="success-body">
+
+      <!-- DELIVERY ADDRESS -->
+      <div class="section-label"><i class="bi bi-geo-alt"></i> &nbsp;Delivering To</div>
+      <div class="addr-box">
+        <div class="addr-name"><%= order.address.name %></div>
+        <%= order.address.house %>, <%= order.address.city %>,<br>
+        <%= order.address.state %> – <%= order.address.pincode %><br>
+        <i class="bi bi-phone" style="font-size:.72rem"></i> <%= order.address.mobile %>
+      </div>
+
+      <!-- ORDER ITEMS -->
+      <div class="section-label"><i class="bi bi-bag-check"></i> &nbsp;Items Ordered</div>
+      <% order.items.forEach(item => { %>
+      <div class="item-row">
+        <img class="item-img" src="<%= item.image %>" alt="<%= item.name %>">
+        <div class="item-info">
+          <div class="item-name"><%= item.name %></div>
+          <div class="item-qty">Qty: <%= item.quantity %></div>
+        </div>
+        <div class="item-price">₹<%= (item.price * item.quantity).toFixed(2) %></div>
+      </div>
+      <% }) %>
+
+      <!-- TOTALS -->
+      <div class="totals">
+        <div class="total-row"><span>Subtotal</span><span>₹<%= order.subtotal.toFixed(2) %></span></div>
+        <div class="total-row"><span>Shipping</span><span>₹<%= order.shipping.toFixed(2) %></span></div>
+        <% if (order.discount > 0) { %>
+        <div class="discount-row"><span>Discount Applied</span><span>-₹<%= order.discount.toFixed(2) %></span></div>
+        <% } %>
+        <div class="grand-row"><span>Total Paid</span><span>₹<%= order.grandTotal.toFixed(2) %></span></div>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <div class="payment-badge">
+        <% if (order.paymentMethod === 'cod') { %>
+          <i class="bi bi-cash-coin"></i> Cash on Delivery
+        <% } else { %>
+          <i class="bi bi-credit-card"></i> Paid via Razorpay
+        <% } %>
+      </div>
+
+    </div>
+
+    <!-- CTA BUTTONS -->
+    <div class="cta-wrap">
+      <a href="/orders" class="btn-primary-custom">View My Orders</a>
+      <a href="/shop" class="btn-outline-custom">Continue Shopping</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>© 2026 LittleBom. All rights reserved.</footer>
+
+<script>
+  // Confetti animation on load
+  const colors = ['#8b5e3c','#f0ede8','#2d7a5a','#e8c9a0','#c49a6c','#fff']
+  const wrap = document.getElementById('confettiWrap')
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div')
+    el.className = 'confetti-piece'
+    el.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${1.5 + Math.random()*2}s;
+      animation-delay:${Math.random()*1.5}s;
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+      opacity:${0.7+Math.random()*0.3}
+    `
+    wrap.appendChild(el)
+  }
+  setTimeout(() => wrap.remove(), 4000)
+</script>
+</body>
+</html>

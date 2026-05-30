@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – LittleBom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;600;700&display=swap">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#8b5e3c;--bg:#faf9f7;--surface:#f0ede8;
+    --border:#e8e4df;--text:#2c2c2c;--muted:#8a8680;
+    --font-h:'Playfair Display',serif;--font-b:'Lato',sans-serif;
+    --tr:0.25s ease;--sidebar-w:240px;
+  }
+  body{font-family:var(--font-b);background:var(--bg);color:var(--text);font-size:14px}
+  .navbar{background:var(--bg);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+  .brand{font-family:var(--font-h);font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  .nav-links a.active{color:var(--primary);border-bottom:2px solid var(--primary);padding-bottom:2px}
+  .nav-icons{display:flex;gap:18px;align-items:center}
+  .nav-icons a{color:var(--text);font-size:1.1rem;text-decoration:none}
+  .breadcrumb-bar{padding:16px 48px 0;font-size:.78rem;color:var(--muted)}
+  .breadcrumb-bar a{color:var(--muted);text-decoration:none}
+  .breadcrumb-bar span{color:var(--text);font-weight:600}
+  .profile-layout{display:flex;gap:0;padding:28px 48px 60px;min-height:calc(100vh - 120px)}
+  .sidebar{width:var(--sidebar-w);flex-shrink:0;margin-right:28px}
+  .sidebar-user{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:12px;text-align:center}
+  .avatar-circle{width:64px;height:64px;border-radius:50%;background:var(--surface);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:1.4rem;color:var(--primary);margin:0 auto 12px}
+  .sidebar-name{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:3px}
+  .sidebar-email{font-size:.75rem;color:var(--muted);word-break:break-all}
+  .sidebar-nav{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:14px 20px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all var(--tr);text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border);user-select:none}
+  .nav-item:last-child{border-bottom:none}
+  .nav-item i{font-size:1rem}
+  .nav-item:hover{background:var(--surface);color:var(--text)}
+  .nav-item.active{color:var(--primary);border-left-color:var(--primary);background:#fdf8f4}
+  .content-area{flex:1;min-width:0}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – LittleBom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;600;700&display=swap">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#8b5e3c;--bg:#faf9f7;--surface:#f0ede8;
+    --border:#e8e4df;--text:#2c2c2c;--muted:#8a8680;
+    --font-h:'Playfair Display',serif;--font-b:'Lato',sans-serif;
+    --tr:0.25s ease;--sidebar-w:240px;
+  }
+  body{font-family:var(--font-b);background:var(--bg);color:var(--text);font-size:14px}
+  .navbar{background:var(--bg);padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+  .brand{font-family:var(--font-h);font-size:1.25rem;font-weight:700;color:var(--text);text-decoration:none}
+  .nav-links{display:flex;gap:32px}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  .nav-links a.active{color:var(--primary);border-bottom:2px solid var(--primary);padding-bottom:2px}
+  .nav-icons{display:flex;gap:18px;align-items:center}
+  .nav-icons a{color:var(--text);font-size:1.1rem;text-decoration:none}
+  .breadcrumb-bar{padding:16px 48px 0;font-size:.78rem;color:var(--muted)}
+  .breadcrumb-bar a{color:var(--muted);text-decoration:none}
+  .breadcrumb-bar span{color:var(--text);font-weight:600}
+  .profile-layout{display:flex;gap:0;padding:28px 48px 60px;min-height:calc(100vh - 120px)}
+  .sidebar{width:var(--sidebar-w);flex-shrink:0;margin-right:28px}
+  .sidebar-user{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 20px;margin-bottom:12px;text-align:center}
+  .avatar-circle{width:64px;height:64px;border-radius:50%;background:var(--surface);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-size:1.4rem;color:var(--primary);margin:0 auto 12px}
+  .sidebar-name{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:3px}
+  .sidebar-email{font-size:.75rem;color:var(--muted);word-break:break-all}
+  .sidebar-nav{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:14px 20px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all var(--tr);text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border);user-select:none}
+  .nav-item:last-child{border-bottom:none}
+  .nav-item i{font-size:1rem}
+  .nav-item:hover{background:var(--surface);color:var(--text)}
+  .nav-item.active{color:var(--primary);border-left-color:var(--primary);background:#fdf8f4}
+  .content-area{flex:1;min-width:0}
+  .tab-panel{display:none}
+  .tab-panel.active{display:block}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .stat{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px 12px;text-align:center}
+  .stat-num{font-family:var(--font-h);font-size:1.8rem;color:var(--primary);line-height:1}
+  .stat-lbl{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:600}
+  .card{background:#fff;border-radius:16px;padding:28px;border:1px solid var(--border);margin-bottom:20px}
+  .card:last-child{margin-bottom:0}
+  .card-title{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px;color:var(--text)}
+  .card-title i{color:var(--primary);font-size:1rem}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+  .field input{padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-b);font-size:.88rem;color:var(--text);background:var(--bg);outline:none;width:100%;transition:border-color var(--tr)}
+  .field input:focus{border-color:var(--primary)}
+  .btn-row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .btn-primary{background:var(--primary);color:#fff;border:none;border-radius:50px;padding:11px 28px;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;font-family:var(--font-b);cursor:pointer;transition:background var(--tr)}
+  .btn-primary:hover{background:#74492d}
+  .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:50px;padding:11px 22px;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;font-family:var(--font-b);cursor:pointer}
+  .addr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+  .addr-card{border:1px solid var(--border);border-radius:10px;padding:16px;background:var(--bg)}
+  .addr-name{font-weight:700;font-size:.9rem;margin-bottom:6px}
+  .addr-text{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:10px}
+  .addr-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .btn-xs{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:4px 12px;background:transparent;cursor:pointer}
+  .btn-xs:hover{color:var(--primary);border-color:var(--primary)}
+  .btn-xs-del{font-size:.7rem;color:#c05050;border:1px solid #e8d8d8;border-radius:20px;padding:4px 12px;background:transparent;cursor:pointer;font-weight:700}
+  .add-addr-btn{background:transparent;border:1px dashed var(--primary);color:var(--primary);border-radius:10px;padding:12px;width:100%;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:background var(--tr)}
+  .add-addr-btn:hover{background:#fdf8f4}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;min-width:480px}
+  th{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+  td{font-size:.86rem;padding:12px 10px;border-bottom:1px solid var(--surface);vertical-align:middle}
+  .oid{font-size:.78rem;color:var(--primary);font-weight:700;white-space:nowrap}
+  .status{font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700;border-radius:4px;padding:3px 9px;display:inline-block;white-space:nowrap}
+  .s-d{background:#edf7f3;color:#2d7a5a}
+  .s-s{background:#f5ede4;color:#7a4a2a}
+  .s-p{background:#faf5e4;color:#7a6020}
+  .s-c{background:#fceaea;color:#8c3030}
+  .btn-view{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--primary);border:1px solid #ddd0c5;border-radius:20px;padding:3px 12px;background:transparent;cursor:pointer;white-space:nowrap}
+  .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+  .empty-state i{font-size:2.5rem;display:block;margin-bottom:12px;color:var(--border)}
+  footer{background:var(--surface);padding:48px 48px 32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}
+  .footer-brand{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:6px}
+  .footer-tag{font-size:.78rem;color:var(--muted);font-weight:300;line-height:1.6}
+  .footer-col-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+  .footer-col a{display:block;font-size:.8rem;color:var(--muted);text-decoration:none;margin-bottom:8px}
+  .footer-col a:hover{color:var(--primary)}
+  .footer-copy{padding:16px 48px;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border)}
+  @media(max-width:900px){
+    .profile-layout{flex-direction:column;padding:20px 24px 40px}
+    .sidebar{width:100%;margin-right:0;margin-bottom:16px}
+    .sidebar-nav{display:flex;overflow-x:auto;border-radius:12px}
+    .nav-item{border-left:none;border-bottom:3px solid transparent;flex-direction:column;gap:4px;padding:12px 16px;white-space:nowrap;flex-shrink:0;font-size:.65rem}
+    .nav-item.active{border-bottom-color:var(--primary);border-left-color:transparent}
+    .sidebar-user{display:flex;align-items:center;gap:14px;text-align:left;padding:16px 20px}
+    .avatar-circle{width:48px;height:48px;font-size:1.1rem;margin:0;flex-shrink:0}
+    .form-grid{grid-template-columns:1fr}
+    .addr-grid{grid-template-columns:1fr}
+    .navbar,.breadcrumb-bar,footer,.footer-copy{padding-left:24px;padding-right:24px}
+    .nav-links{display:none}
+  }
+  @media(max-width:480px){
+    .profile-layout,.navbar,.breadcrumb-bar,footer,.footer-copy{padding-left:16px;padding-right:16px}
+    .stats-row{grid-template-columns:1fr 1fr}
+    .card{padding:18px 14px}
+  }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a class="brand" href="#">LittleBom</a>
+  <div class="nav-links">
+    <a href="/home">Home</a>
+    <a href="/shop">Shop</a>
+    <a href="/profile" class="active">My Account</a>
+  </div>
+  <div class="nav-icons">
+    <a href="/cart"><i class="bi bi-bag"></i></a>
+    <a href="/profile"><i class="bi bi-person"></i></a>
+    <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+  </div>
+</div>
+
+<div class="breadcrumb-bar">
+  <a href="/home">Home</a> &nbsp;/&nbsp; <span>My Account</span>
+</div>
+
+<div class="profile-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-user">
+      <div class="avatar-circle"><%= user.name.charAt(0).toUpperCase() %></div>
+      <div class="sidebar-name"><%= user.name %></div>
+      <div class="sidebar-email"><%= user.email %></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-tab="profile">
+        <i class="bi bi-person"></i> Profile Details
+      </div>
+      <div class="nav-item" data-tab="addresses">
+        <i class="bi bi-geo-alt"></i> Addresses
+      </div>
+      <div class="nav-item" data-tab="orders">
+        <i class="bi bi-bag-check"></i> My Orders
+      </div>
+      <div class="nav-item" data-tab="password">
+        <i class="bi bi-shield-lock"></i> Password
+      </div>
+    </nav>
+  </aside>
+
+  <main class="content-area">
+
+    <!-- TAB 1: PROFILE -->
+    <div class="tab-panel active" id="tab-profile">
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-num"><%= totalOrders %></div>
+          <div class="stat-lbl">Total Orders</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><%= delivered %></div>
+          <div class="stat-lbl">Delivered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num"><%= inProgress %></div>
+          <div class="stat-lbl">In Progress</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title"><i class="bi bi-person-circle"></i> Personal Information</div>
+        <div class="form-grid">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="name" value="<%= user.name %>">
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" id="email" value="<%= user.email %>">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-primary" id="saveProfile">Save Changes</button>
+          <button class="btn-ghost" id="discardBtn">Discard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: ADDRESSES -->
+    <div class="tab-panel" id="tab-addresses">
+      <div class="card">
+        <div class="card-title"><i class="bi bi-geo-alt"></i> Manage Addresses</div>
+        <div class="addr-grid">
+          <% addresses.forEach(function(address){ %>
+          <div class="addr-card">
+            <div class="addr-name"><%= address.name %></div>
+            <div class="addr-text">
+              <%= address.house %><br>
+              <%= address.city %>, <%= address.state %> - <%= address.pincode %><br>
+              <i class="bi bi-phone" style="font-size:.75rem"></i> <%= address.mobile %>
+            </div>
+            <div class="addr-actions">
+              <button class="btn-xs editAddress"
+                data-id="<%= address._id %>"
+                data-name="<%= address.name %>"
+                data-mobile="<%= address.mobile %>"
+                data-house="<%= address.house %>"
+                data-city="<%= address.city %>"
+                data-state="<%= address.state %>"
+                data-pincode="<%= address.pincode %>">Edit</button>
+              <button class="btn-xs-del deleteAddress" data-id="<%= address._id %>">Remove</button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <button class="add-addr-btn" data-bs-toggle="modal" data-bs-target="#addressModal">
+          + Add New Address
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 3: MY ORDERS -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="card">
+        <div class="card-title"><i class="bi bi-bag-check"></i> My Orders</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if(orders.length === 0){ %>
+                <tr>
+                  <td colspan="6">
+                    <div class="empty-state">
+                      <i class="bi bi-bag"></i>
+                      <p>No orders yet. Start shopping!</p>
+                    </div>
+                  </td>
+                </tr>
+              <% } else { orders.forEach(function(order){ %>
+                <tr>
+                  <td class="oid">#<%= order._id.toString().slice(-6).toUpperCase() %></td>
+                  <td><%= new Date(order.createdAt).toLocaleDateString('en-IN') %></td>
+                  <td><%= order.items.length %> item(s)</td>
+                  <td>Rs. <%= order.grandTotal %></td>
+                  <td><span class="status s-p"><%= order.orderStatus %></span></td>
+                  <td><a href="/orders/<%= order._id %>"><button class="btn-view">View</button></a></td>
+                </tr>
+              <% }); } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: PASSWORD -->
+    <div class="tab-panel" id="tab-password">
+      <div class="card">
+        <div class="card-title"><i class="bi bi-shield-lock"></i> Change Password</div>
+        <div class="form-grid">
+          <div class="field" style="grid-column:1/-1">
+            <label>Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password">
+          </div>
+          <div class="field">
+            <label>New Password</label>
+            <input type="password" id="newPassword" placeholder="Min 6 characters">
+          </div>
+          <div class="field">
+            <label>Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Repeat new password">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-primary" id="updatePassword">Update Password</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LittleBom</div>
+    <div class="footer-tag">Quality kids clothing,<br>crafted with love.</div>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Shop</div>
+    <a href="#">New Arrivals</a><a href="#">Boys</a><a href="#">Girls</a>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Help</div>
+    <a href="#">Returns</a><a href="#">Shipping</a><a href="#">Contact</a>
+  </div>
+</footer>
+<div class="footer-copy">2026 LittleBom. All rights reserved.</div>
+
+<!-- ADDRESS MODAL -->
+<div class="modal fade" id="addressModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addressModalTitle">Add Address</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="addressName" class="form-control mb-2" placeholder="Full Name">
+        <input type="number" id="addressMobile" class="form-control mb-2" placeholder="Mobile">
+        <input type="text" id="addressHouse" class="form-control mb-2" placeholder="House / Street">
+        <input type="text" id="addressCity" class="form-control mb-2" placeholder="City">
+        <input type="text" id="addressState" class="form-control mb-2" placeholder="State">
+        <input type="number" id="addressPincode" class="form-control" placeholder="Pincode">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-dark" id="saveAddress">Save Address</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/user/profile.js"></script>
+</body>
+</html>
+
+ 

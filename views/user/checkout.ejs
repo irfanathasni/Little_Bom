@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout – LittleBom</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;600;700&display=swap">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --primary:#8b5e3c;--bg:#faf9f7;--surface:#f0ede8;
+    --border:#e8e4df;--text:#2c2c2c;--muted:#8a8680;
+    --font-h:'Playfair Display',serif;--font-b:'Lato',sans-serif;
+    --tr:0.25s ease;
+  }
+  body{font-family:var(--font-b);background:var(--bg);color:var(--text);font-size:14px}
+  .navbar-custom{background:var(--bg);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+  .navbar-brand-text{font-family:var(--font-h);font-size:1.35rem;font-weight:700;color:var(--text);text-decoration:none}
+  .navbar-links{display:flex;gap:36px}
+  .navbar-links a{text-decoration:none;color:var(--muted);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+  .navbar-links a:hover{color:var(--primary)}
+  .navbar-icons{display:flex;align-items:center;gap:20px}
+  .navbar-icons a{color:var(--text);font-size:1.1rem;text-decoration:none}
+  .breadcrumb-bar{padding:16px 48px 0;font-size:.78rem;color:var(--muted)}
+  .breadcrumb-bar a{color:var(--muted);text-decoration:none}
+  .breadcrumb-bar span{color:var(--text);font-weight:600}
+  .checkout-layout{display:grid;grid-template-columns:1fr 380px;gap:28px;padding:28px 48px 60px;align-items:start}
+  .card{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--border);margin-bottom:20px}
+  .card:last-child{margin-bottom:0}
+  .card-title{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+  .card-title i{color:var(--primary)}
+  .addr-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+  .addr-option{border:1px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all var(--tr);display:flex;align-items:flex-start;gap:12px}
+  .addr-option:hover{border-color:var(--primary);background:#fdf8f4}
+  .addr-option.selected{border-color:var(--primary);background:#fdf8f4}
+  .addr-option input[type="radio"]{accent-color:var(--primary);margin-top:3px;flex-shrink:0;width:16px;height:16px}
+  .addr-name{font-weight:700;font-size:.88rem;margin-bottom:3px}
+  .addr-text{font-size:.8rem;color:var(--muted);line-height:1.6}
+  .no-address{text-align:center;padding:20px;color:var(--muted);font-size:.85rem}
+  .add-addr-link{color:var(--primary);font-weight:700;text-decoration:none;font-size:.82rem;display:inline-flex;align-items:center;gap:5px;margin-top:8px}
+  .order-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--surface);align-items:center}
+  .order-item:last-child{border-bottom:none;padding-bottom:0}
+  .item-img{width:56px;height:56px;border-radius:8px;object-fit:cover;background:var(--surface);flex-shrink:0}
+  .item-info{flex:1}
+  .item-name{font-weight:700;font-size:.86rem;margin-bottom:2px}
+  .item-qty{font-size:.78rem;color:var(--muted)}
+  .item-price{font-weight:700;font-size:.88rem;color:var(--primary);white-space:nowrap}
+  .summary-card{background:#fff;border-radius:16px;padding:24px;border:1px solid var(--border);position:sticky;top:80px}
+  .summary-title{font-family:var(--font-h);font-size:1.1rem;font-weight:700;margin-bottom:18px}
+  .summary-row{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:10px;color:var(--muted)}
+  .summary-row span:last-child{color:var(--text);font-weight:600}
+  .summary-divider{border:none;border-top:1px solid var(--border);margin:14px 0}
+  .summary-total{display:flex;justify-content:space-between;font-weight:700;font-size:1rem}
+  .summary-total span:last-child{color:var(--primary)}
+  .discount-row{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:10px;color:#2d7a5a}
+  .coupon-wrap{display:flex;gap:8px;margin-bottom:6px}
+  .coupon-input{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:.84rem;font-family:var(--font-b);outline:none;background:var(--bg);color:var(--text)}
+  .coupon-input:focus{border-color:var(--primary)}
+  .coupon-btn{background:var(--surface);color:var(--primary);border:1px solid var(--border);border-radius:8px;padding:9px 14px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+  .coupon-msg{font-size:.78rem;margin-bottom:10px;min-height:18px}
+  .coupon-msg.success{color:#2d7a5a}
+  .coupon-msg.error{color:#c05050}
+  .pay-btn{width:100%;border:none;background:var(--primary);color:#fff;padding:16px;border-radius:50px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:background var(--tr);margin-top:16px;font-family:var(--font-b)}
+  .pay-btn:hover{background:#74492d}
+  .pay-btn:disabled{background:var(--muted);cursor:not-allowed}
+  .secure-note{text-align:center;font-size:.72rem;color:var(--muted);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:5px}
+  footer{background:var(--surface);padding:48px 48px 32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:20px}
+  .footer-brand{font-family:var(--font-h);font-size:1rem;font-weight:700;margin-bottom:6px}
+  .footer-tag{font-size:.78rem;color:var(--muted);line-height:1.6}
+  .footer-col-title{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+  .footer-col a{display:block;font-size:.8rem;color:var(--muted);text-decoration:none;margin-bottom:8px}
+  .footer-col a:hover{color:var(--primary)}
+  .footer-copy{padding:16px 48px;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border)}
+  @media(max-width:900px){
+    .checkout-layout{grid-template-columns:1fr;padding:20px 24px 40px}
+    .summary-card{position:static}
+    .navbar-custom,.breadcrumb-bar,footer,.footer-copy{padding-left:24px;padding-right:24px}
+    .navbar-links{display:none}
+  }
+  @media(max-width:480px){
+    .checkout-layout,.navbar-custom,.breadcrumb-bar,footer,.footer-copy{padding-left:16px;padding-right:16px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar-custom">
+  <a href="/" class="navbar-brand-text">LittleBom</a>
+  <div class="navbar-links">
+    <a href="/home">Home</a>
+    <a href="/shop">Shop</a>
+  </div>
+  <div class="navbar-icons">
+    <a href="/cart"><i class="bi bi-bag"></i></a>
+    <a href="/profile"><i class="bi bi-person"></i></a>
+    <a href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+  </div>
+</nav>
+
+<div class="breadcrumb-bar">
+  <a href="/home">Home</a> &nbsp;/&nbsp;
+  <a href="/cart">Cart</a> &nbsp;/&nbsp;
+  <span>Checkout</span>
+</div>
+
+<div class="checkout-layout">
+
+  <div>
+    <!-- DELIVERY ADDRESS -->
+    <div class="card">
+      <div class="card-title"><i class="bi bi-geo-alt"></i> Delivery Address</div>
+      <% if (addresses.length === 0) { %>
+        <div class="no-address">
+          <i class="bi bi-map" style="font-size:2rem;display:block;margin-bottom:8px;color:var(--border)"></i>
+          No saved addresses found.
+        </div>
+        <a href="/profile#addresses" class="add-addr-link">
+          <i class="bi bi-plus-circle"></i> Add a new address
+        </a>
+      <% } else { %>
+        <div class="addr-list">
+          <% addresses.forEach((address, index) => { %>
+          <label class="addr-option <%= index === 0 ? 'selected' : '' %>">
+            <input type="radio" name="selectedAddress" value="<%= address._id %>" <%= index === 0 ? 'checked' : '' %>>
+            <div>
+              <div class="addr-name"><%= address.name %></div>
+              <div class="addr-text">
+                <%= address.house %>, <%= address.city %>,<br>
+                <%= address.state %> – <%= address.pincode %><br>
+                <i class="bi bi-phone" style="font-size:.72rem"></i> <%= address.mobile %>
+              </div>
+            </div>
+          </label>
+          <% }) %>
+        </div>
+        <a href="/profile#addresses" class="add-addr-link">
+          <i class="bi bi-plus-circle"></i> Add a new address
+        </a>
+      <% } %>
+    </div>
+
+    <!-- ORDER ITEMS -->
+    <div class="card">
+      <div class="card-title"><i class="bi bi-bag-check"></i> Order Items (<%= cartItems.length %>)</div>
+      <% cartItems.forEach(item => { %>
+      <div class="order-item">
+        <img class="item-img" src="<%= item.product.image[0] %>" alt="<%= item.product.name %>">
+        <div class="item-info">
+          <div class="item-name"><%= item.product.name %></div>
+          <div class="item-qty">Qty: <%= item.quantity %></div>
+        </div>
+        <div class="item-price">₹<%= (item.product.price * item.quantity).toFixed(2) %></div>
+      </div>
+      <% }) %>
+    </div>
+    
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary-card">
+    <div class="summary-title">Order Summary</div>
+    <div class="summary-row"><span>Subtotal</span><span>₹<%= subtotal.toFixed(2) %></span></div>
+    <div class="summary-row"><span>Shipping</span><span>₹<%= shipping.toFixed(2) %></span></div>
+   <div class="discount-row" id="discountRow" style="<%= discountAmount > 0 ? '' : 'display:none' %>">
+    <span>Discount</span>
+    <span id="discountVal">-₹<%= discountAmount > 0 ? discountAmount.toFixed(2) : '0' %></span>
+</div>
+
+    <hr class="summary-divider">
+    <!-- PAYMENT METHOD -->
+    <div class="card">
+      <div class="card-title"><i class="bi bi-credit-card"></i> Payment Method</div>
+
+      <label class="addr-option selected" id="label-razorpay">
+        <input type="radio" name="paymentMethod" value="razorpay" checked>
+        <div>
+          <div class="addr-name">Pay Online (Razorpay)</div>
+          <div class="addr-text">UPI, Card, Net Banking</div>
+        </div>
+      </label>
+
+      <label class="addr-option" id="label-cod" style="margin-top:10px">
+        <input type="radio" name="paymentMethod" value="cod">
+        <div>
+          <div class="addr-name">Cash on Delivery</div>
+          <div class="addr-text">Pay when your order arrives</div>
+        </div>
+      </label>
+
+    </div>
+    <div class="summary-total">
+      <span>Total</span>
+      <span id="grandTotalVal">₹<%= finalTotal.toFixed(2) %></span>
+    </div>
+    <hr class="summary-divider">
+    <div class="coupon-wrap">
+      <input type="text" class="coupon-input" id="couponInput" 
+         placeholder="Coupon code" value="<%= appliedCoupon ? appliedCoupon.code : '' %>">
+      <button class="coupon-btn" id="applyCouponBtn">Apply</button>
+    </div>
+    <div class="coupon-msg" id="couponMsg"></div>
+    <button class="pay-btn" id="payBtn">
+      <i class="bi bi-lock"></i> &nbsp;Pay with Razorpay
+    </button>
+    <div class="secure-note"><i class="bi bi-shield-check"></i> 100% Secure Payment</div>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="footer-brand">LittleBom</div>
+    <div class="footer-tag">Quality kids clothing,<br>crafted with love.</div>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Shop</div>
+    <a href="#">New Arrivals</a><a href="#">Boys</a><a href="#">Girls</a>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Help</div>
+    <a href="#">Returns</a><a href="#">Shipping</a><a href="#">Contact</a>
+  </div>
+</footer>
+<div class="footer-copy">© 2026 LittleBom. All rights reserved.</div>
+<input type="hidden" id="razorpayKeyId" value="<%= razorpayKeyId %>">
+<input type="hidden" id="grandTotal" value="<%= finalTotal %>">
+<input type="hidden" id="userName"      value="<%= user.name %>">
+<input type="hidden" id="userEmail"     value="<%= user.email %>">
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/user/checkout.js"></script>
+</body>
+</html>

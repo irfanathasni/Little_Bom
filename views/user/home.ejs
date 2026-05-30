@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Little Bom</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      background:#f7f4f1;
+      font-family: 'Poppins', sans-serif;
+      color:#2e2e2e;
+    }
+
+     /* ── NAVBAR ── */
+        .navbar-custom {
+            background: var(--color-bg);
+            padding: 20px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand-text {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--color-text);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 36px;
+        }
+
+        .navbar-links a {
+            text-decoration: none;
+            color: var(--color-muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color var(--transition);
+        }
+
+        .navbar-links a.active,
+        .navbar-links a:hover { color: var(--color-primary); }
+        .navbar-links a.active { border-bottom: 2px solid var(--color-primary); padding-bottom: 2px; }
+
+        .navbar-icons { display: flex; align-items: center; gap: 20px; }
+        .navbar-icons a {
+            color: var(--color-text);
+            font-size: 1.15rem;
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+        .navbar-icons a:hover { color: var(--color-primary); }
+
+
+    /* HERO */
+
+    .hero-section{
+      padding:10px 40px 60px;
+    }
+
+    .hero-banner{
+      position:relative;
+      overflow:hidden;
+      border-radius:40px;
+      height:650px;
+    }
+
+    .hero-banner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(88%);
+    }
+
+    .hero-content{
+      position:absolute;
+      top:50%;
+      left:80px;
+      transform:translateY(-50%);
+      max-width:500px;
+    }
+
+    .hero-title{
+      font-size:90px;
+      font-weight:700;
+      line-height:1;
+      margin-bottom:25px;
+    }
+
+    .hero-text{
+      font-size:24px;
+      color:#555;
+      line-height:1.7;
+    }
+
+    /* DISCOVER */
+
+    .discover-section{
+      padding:50px 40px;
+    }
+
+    .discover-small{
+      letter-spacing:5px;
+      color:#9b6645;
+      font-size:18px;
+      margin-bottom:10px;
+      font-weight:600;
+    }
+
+    .discover-title{
+      font-size:70px;
+      font-weight:700;
+      margin-bottom:50px;
+    }
+
+    .category-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:35px;
+      height:620px;
+    }
+
+    .category-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .category-content{
+      position:absolute;
+      left:40px;
+      bottom:40px;
+      color:white;
+    }
+
+    .category-content h2{
+      font-size:55px;
+      font-weight:700;
+    }
+
+    .category-content p{
+      font-size:22px;
+      margin:15px 0;
+    }
+
+    .shop-btn{
+      border:1px solid white;
+      color:white;
+      border-radius:50px;
+      padding:14px 30px;
+      text-decoration:none;
+      display:inline-block;
+      font-size:18px;
+      backdrop-filter: blur(5px);
+    }
+
+    .small-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:35px;
+      height:295px;
+      margin-bottom:30px;
+    }
+
+    .small-card img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .small-card h3{
+      position:absolute;
+      bottom:25px;
+      left:30px;
+      color:white;
+      font-size:38px;
+      font-weight:700;
+    }
+
+    /* ABOUT */
+
+    .about-section{
+      padding:80px 40px;
+      background:#efe9e4;
+    }
+
+    .about-image{
+      border-radius:35px;
+      overflow:hidden;
+    }
+
+    .about-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .about-content{
+      padding-left:40px;
+    }
+
+    .about-content h2{
+      font-size:70px;
+      font-weight:700;
+      line-height:1.2;
+      margin-bottom:30px;
+    }
+
+    .about-content p{
+      font-size:22px;
+      color:#666;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    .feature{
+      display:flex;
+      align-items:center;
+      margin-bottom:25px;
+    }
+
+    .feature-icon{
+      width:55px;
+      height:55px;
+      border-radius:50%;
+      background:#dbe8c7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-right:18px;
+    }
+
+    .feature-text{
+      font-size:24px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#f1ece7;
+      padding:90px 40px;
+      margin-top:80px;
+      border-top-left-radius:50px;
+      border-top-right-radius:50px;
+    }
+
+    .footer-logo{
+      font-size:45px;
+      font-weight:700;
+      margin-bottom:20px;
+    }
+
+    .footer-desc{
+      color:#666;
+      font-size:20px;
+      line-height:1.8;
+      max-width:350px;
+    }
+
+    .footer-title{
+      font-size:20px;
+      letter-spacing:4px;
+      color:#9b6645;
+      margin-bottom:30px;
+      font-weight:600;
+    }
+
+    .footer-links{
+      list-style:none;
+      padding:0;
+    }
+
+    .footer-links li{
+      margin-bottom:18px;
+    }
+
+    .footer-links a{
+      text-decoration:none;
+      color:#555;
+      font-size:20px;
+    }
+
+    .social-icons i{
+      width:50px;
+      height:50px;
+      background:white;
+      border-radius:50%;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-right:10px;
+      font-size:20px;
+    }
+
+    @media(max-width:992px){
+
+      .hero-title{
+        font-size:55px;
+      }
+
+      .discover-title{
+        font-size:45px;
+      }
+
+      .about-content{
+        padding-left:0;
+        margin-top:40px;
+      }
+
+      .about-content h2{
+        font-size:45px;
+      }
+
+      .category-card{
+        margin-bottom:30px;
+      }
+
+    }
+   .small-card{
+    position: relative;
+    height: 295px;
+    border-radius: 35px;
+    overflow: hidden;
+    }
+
+   .small-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar-custom" role="navigation" aria-label="Main navigation">
+    <a href="/" class="navbar-brand-text">Little Bom</a>
+    <div class="navbar-links">
+        <a href="/home" class="active" aria-current="page">HOME</a>
+        <a href="/shop" class="active" aria-current="page">SHOP</a>
+    </div>
+   <div class="navbar-icons">
+        <a href="/cart" aria-label="Shopping bag"><i class="bi bi-bag"></i></a>
+        <a href="/profile" aria-label="Account"><i class="bi bi-person"></i></a>
+        <a href="/logout"><i class="bi bi-box-arrow-right"></i> </a>
+    </div>
+</nav>
+
+  <!-- HERO -->
+
+  <section class="hero-section">
+
+    <div class="hero-banner">
+        <img id="heroImage" src="" alt="Hero Image">
+
+      <div class="hero-content">
+
+        <h1 class="hero-title">
+          Soft as a gentle breeze.
+        </h1>
+
+        <p class="hero-text">
+          Thoughtfully crafted garments for the early years,
+          designed with comfort and curiosity in mind.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- DISCOVER -->
+
+  <section class="discover-section">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <div class="discover-small">DISCOVER</div>
+        <h2 class="discover-title">Shop by Category</h2>
+      </div>
+
+      <a href="/shop" class="text-decoration-none fs-4" style="color:#9b6645;">
+        View All Categories
+      </a>
+    </div>
+
+    <div class="row" id="categoryContainer">
+
+      <div class="col-lg-8">
+
+        <div class="category-card">
+          <div class="category-content">
+
+            <h2>Signature Sets</h2>
+            <p>Effortless coordination for busy mornings.</p>
+            <a href="/shop" class="shop-btn">Shop Sets</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-lg-4">
+
+        <div class="small-card">
+
+
+
+          <h3>Daily Tops</h3>
+
+        </div>
+
+        <div class="small-card">
+
+
+
+          <h3>Bottoms</h3>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="about-section">
+
+    <div class="row align-items-center">
+
+      <div class="col-lg-6">
+
+        <div class="about-image">
+             <img src="/images/about.jpg" alt="About Image">
+        </div>
+
+      </div>
+
+      <div class="col-lg-6">
+
+        <div class="about-content">
+
+          <h2>
+            Designed with intention,
+            worn with love.
+          </h2>
+
+          <p>
+            We believe that children's clothing should be as sustainable
+            as it is beautiful. Our fabrics are sourced from organic
+            producers and every stitch is made to last through countless adventures.
+          </p>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="bi bi-flower1"></i>
+            </div>
+
+            <div class="feature-text">
+              100% Organic Cotton
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="bi bi-droplet"></i>
+            </div>
+
+            <div class="feature-text">
+              Non-toxic Dyes
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <i class="bi bi-patch-check"></i>
+            </div>
+
+            <div class="feature-text">
+              Fair Trade Certified
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="row">
+
+      <div class="col-lg-4 mb-5">
+
+        <div class="footer-logo">Little Bom</div>
+
+        <p class="footer-desc">
+          Thoughtfully crafted for the tiny humans in your life.
+          We focus on comfort, quality and timeless style.
+        </p>
+
+      </div>
+
+      <div class="col-lg-3 mb-5">
+
+        <div class="footer-title">EXPLORE</div>
+
+        <ul class="footer-links">
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Journal</a></li>
+        </ul>
+
+      </div>
+
+      <div class="col-lg-3 mb-5">
+
+        <div class="footer-title">CUSTOMER CARE</div>
+
+        <ul class="footer-links">
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+
+        <div class="footer-title">CONNECT</div>
+        <p class="text-muted">
+          © 2024 LITTLE BOM. CRAFTED FOR THE EARLY YEARS.
+        </p>
+
+      </div>
+
+    </div>
+
+  </footer>
+<script src="/js/user/home.js"></script>
+</body>
+</html>
