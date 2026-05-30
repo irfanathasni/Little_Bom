@@ -3,6 +3,7 @@ const categoryImages = {
     Boys :"/images/Boys.jpg",
     Girls :"/images/Girls.jpg",
     Unisex :"/images/Unisex.jpg",
+    NewBorn :"/images/NewBorn.jpg"
 }
 fetch("/homeData")
 .then(res => res.json())
