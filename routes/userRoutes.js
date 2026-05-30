@@ -35,4 +35,8 @@ router.get("/orders/:id",userAuth, userController.getOrderDetail)
 router.post('/orders/:id/cancel', userController.cancelOrder)
 router.post('/orders/:id/return', userController.returnOrder)
 router.get('/order-success/:orderId',userAuth,userController.getOrderSuccess)
+router.get("/",(req,res) =>{
+    res.redirect("/login")
+})
 module.exports = router
+
