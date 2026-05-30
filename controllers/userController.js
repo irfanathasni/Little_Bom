@@ -73,7 +73,7 @@ const getHomeProducts = async (req,res) =>{
     try{
         const product = await Product.findOne()
         const categories = await Catagory.find({isActive:true})
-        res.json({success:true,heroImage:product.image[6],categories})
+        res.json({success:true,heroImage:product.image[0],categories})
     }
     catch(error){
         console.log(error)
