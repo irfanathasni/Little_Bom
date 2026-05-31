@@ -305,7 +305,7 @@ const createRazorPayOrder = async (req,res) =>{
 const verifyPayment = async (req, res) => {
     try{
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature,addressId} = req.body
-        // console.log("addressId received:",addressId)
+        console.log("addressId received:",addressId)
          console.log("=== VERIFY PAYMENT HIT ===")
         console.log("order_id:", razorpay_order_id)
         console.log("payment_id:", razorpay_payment_id)
@@ -354,7 +354,7 @@ const verifyPayment = async (req, res) => {
         discount:discountAmount,
         grandTotal:finalTotal,
         paymentMethod:"razorpay",
-        paymentStatus:"compleated",
+       paymentStatus:"completed",
         razorpayOrderId:razorpay_order_id,
         razorpayPaymentId:razorpay_payment_id,
         razorpaySignature:razorpay_signature
