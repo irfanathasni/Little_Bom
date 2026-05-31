@@ -348,7 +348,7 @@ const verifyPayment = async (req, res) => {
         shipping,
         grandTotal,
         paymentMethod:"razorpay",
-        paymentStatus:"completed",
+        paymentStatus:"compleated",
         razorpayOrderId:razorpay_order_id,
         razorpayPaymentId:razorpay_payment_id,
         razorpaySignature:razorpay_signature
