@@ -219,7 +219,6 @@ const getAnalyticsData = async () =>{
             }},
             {$sort :{"_id.year":1, "_id.month":1}},
         ])
-        // console.log("monthSales:", JSON.stringify(monthSales))
        const dailySales = await Order.aggregate([
     { $match: {createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },} },
     {$group: {_id: {
@@ -231,9 +230,8 @@ const getAnalyticsData = async () =>{
             orders: { $sum: 1 }
         } }, { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } }
         ])
-            // console.log("dailySales:", JSON.stringify(dailySales))
         const weeklySales = await Order.aggregate([
-            {$match:{createdAt:{$gte :new Date(Date.now() -56*24*60*60*1000)},
+            {$match:{createdAt:{$gte :new Date(Date.now() - 56*24*60*60*1000)},
             orderStatus:{$nin:['cancelled','returned']}}},
             {$group:{_id:{week:{$week:"$createdAt"},year:{$year:"$createdAt"}},
         orders:{$sum:1}}},
