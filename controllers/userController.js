@@ -305,12 +305,6 @@ const createRazorPayOrder = async (req,res) =>{
 const verifyPayment = async (req, res) => {
     try{
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature,addressId} = req.body
-        console.log("addressId received:",addressId)
-         console.log("=== VERIFY PAYMENT HIT ===")
-        console.log("order_id:", razorpay_order_id)
-        console.log("payment_id:", razorpay_payment_id)
-        console.log("signature:", razorpay_signature)
-        console.log("addressId:", addressId)
         const userId = req.session.user._id
         const body = razorpay_order_id + "|" + razorpay_payment_id
         const expectedSignature = crypto
@@ -354,7 +348,7 @@ const verifyPayment = async (req, res) => {
         discount:discountAmount,
         grandTotal:finalTotal,
         paymentMethod:"razorpay",
-       paymentStatus:"completed",
+        paymentStatus:"completed",
         razorpayOrderId:razorpay_order_id,
         razorpayPaymentId:razorpay_payment_id,
         razorpaySignature:razorpay_signature
