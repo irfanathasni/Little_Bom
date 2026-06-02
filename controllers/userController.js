@@ -81,16 +81,12 @@ const getHomeProducts = async (req,res) =>{
 //productDetails
 const productDetails = async(req,res) =>{
     try{
-        //  console.log("Route working")
         const productId = req.params.id
-        // console.log(productId)
         const product = await userService.getproductDetails(productId)
-        // console.log(product)
         if(!product){
             return res.send("product not found")
         }
         res.render(`user/productDetail`,{product})
-        // res.send(product)
     }
     catch(error){
         console.log(error)
