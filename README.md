@@ -8,8 +8,6 @@ A full-stack e-commerce web application for kids clothing, built with Node.js, E
 - **Frontend:** EJS, Bootstrap 5, Chart.js
 - **Payment:** Razorpay
 - **Authentication:** Express Session
-
-
 ##  Setup & Installation
 
 ### 1. Clone the repository

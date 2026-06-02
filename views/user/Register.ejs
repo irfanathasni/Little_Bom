@@ -17,22 +17,53 @@
     <div class="brand">Little Bom</div>
     <div class="sub-text">Create your account</div>
 
-    <% if (error) { %>
+    <!-- <% if (error) { %>
         <div class="alert alert-danger"><%= error %></div>
-    <% } %>
+    <% } %> -->
 
-    <form action="/register" method="POST">
-        <input type="text" name="name" placeholder="Full Name" class="form-control" required>
-        <input type="email" name="email" placeholder="Email" class="form-control" required>
-        <input type="password" name="password" placeholder="Password" class="form-control" required>
-        <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" required>
-        <button type="submit" class="btn btn-auth">Register</button>
-    </form>
+  <form id="registerForm">
+    <input type="text" name="name" placeholder="Full Name" class="form-control" required>
+    <input type="email" name="email" placeholder="Email" class="form-control" required>
+    <input type="password" name="password" placeholder="Password" class="form-control" required>
+    <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" required>
+
+    <div id="errorMsg" class="alert alert-danger d-none"></div>
+
+    <button type="submit" class="btn btn-auth">Register</button>
+</form>
 
     <div class="switch-text">
         Already have an account? <a href="/login">Login</a>
     </div>
 
 </div>
+<script>
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const name            = document.querySelector('[name="name"]').value
+    const email           = document.querySelector('[name="email"]').value
+    const password        = document.querySelector('[name="password"]').value
+    const confirmPassword = document.querySelector('[name="confirmPassword"]').value
+
+    const errorMsg = document.getElementById("errorMsg")
+    errorMsg.classList.add("d-none")
+
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, confirmPassword })
+    })
+
+    const data = await response.json()
+
+    if (data.success) {
+      window.location.href = "/login"   // JS redirect
+    } else {
+      errorMsg.innerText = data.message
+      errorMsg.classList.remove("d-none")
+    }
+  })
+</script>
 </body>
 </html>

@@ -16,14 +16,12 @@ const postRegister = async (req, res) => {
     try {
         const { name, email, password, confirmPassword } = req.body
         if (password !== confirmPassword) {
-            return res.render("user/register", {
-                error: "Passwords do not match"
-            })
+            return res.json({success:false,message: "Passwords do not match"})
         }
         await userService.registerUser({ name, email, password })
-        res.redirect("/login");
+        res.json({success:true})
     } catch (err) {
-        res.render("user/register", { error: err.message })
+        res.json({success:false,message:error.message})
     }
 }
 
