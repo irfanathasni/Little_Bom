@@ -1,4 +1,3 @@
- 
 const navItems = document.querySelectorAll(".nav-item")
 const tabPanels = document.querySelectorAll(".tab-panel")
 
@@ -172,7 +171,6 @@ window.addEventListener("DOMContentLoaded", () => {
     if (targetNav) targetNav.click()
   }
 })
-
 navItems.forEach(item => {
   item.addEventListener("click", () => {
     history.replaceState(null, "", `#${item.dataset.tab}`)
