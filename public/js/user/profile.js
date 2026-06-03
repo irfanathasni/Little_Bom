@@ -11,7 +11,6 @@ navItems.forEach(item => {
     document.getElementById(`tab-${target}`).classList.add("active")
   })
 })
-
 //PROFILE UPDATE 
 const originalName = document.getElementById("name").value
 const originalEmail = document.getElementById("email").value

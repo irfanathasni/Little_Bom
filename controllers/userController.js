@@ -446,7 +446,6 @@ const returnOrder = async(req,res) =>{
     try{
         const orderId = req.params.id
         const order = await Order.findById(orderId)
-        console.log("order status:",order.orderStatus)
         if(order.orderStatus !=='delivered'){
             return res.json({success:false,message:"Only delivery orders can be returned"})
         }

@@ -58,7 +58,7 @@
     const data = await response.json()
 
     if (data.success) {
-      window.location.href = "/login"   // JS redirect
+      window.location.href = "/login"  
     } else {
       errorMsg.innerText = data.message
       errorMsg.classList.remove("d-none")
