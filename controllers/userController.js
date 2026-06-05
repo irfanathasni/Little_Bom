@@ -21,7 +21,7 @@ const postRegister = async (req, res) => {
         await userService.registerUser({ name, email, password })
         res.json({ success: true })
     } catch (err) {
-        res.json({ success: false, message: error.message })
+        res.json({ success: false, message: err.message })
     }
 }
 
